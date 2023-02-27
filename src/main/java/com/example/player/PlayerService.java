@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class PlayerService implements PlayerRepository {
 
     private static HashMap<Integer, Player> team = new HashMap<>();
-    int uniquePlayerId = 3;
+    int uniquePlayerId = 12;
 
     public PlayerService() {
         team.put(1, new Player(1, "Alexander", 5, "All-rounder"));
@@ -54,17 +54,17 @@ public class PlayerService implements PlayerRepository {
         }
         return player;
     }
-    
+
     @Override
     public Player addPlayer(Player player){
         player.setPlayerId(uniquePlayerId);
-        team.put(uniquePlayerId,player);
+        team.put(uniquePlayerId, player);
         uniquePlayerId += 1;
         return player;
     }
 
     @Override
-    public Player updatePlayer(int playerId,Player player){
+    public Player updatePlayer(int playerId, Player player){
         Player existingPlayer = team.get(playerId);
         if(existingPlayer == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -72,13 +72,14 @@ public class PlayerService implements PlayerRepository {
         if(player.getPlayerName() != null){
             existingPlayer.setPlayerName(player.getPlayerName());
         }
-        if(player.getPlayerRole() != null){
-            existingPlayer.setPlayerRole(player.getPlayerRole());
+        if(String.valueOf(player.getJerseyNumber()) != null){
+            existingPlayer.setJerseyNumber(player.getJerseyNumber());
         }
-        if(player.getPlayerJerseyNumber() != null){
-            existingPlayer.setPlayerJerseyNumber(player.getPlayerJerseyNumber());
+        if(player.getRole() != null){
+            existingPlayer.setRole(player.getRole());
         }
         return existingPlayer;
+        
     }
 
     @Override
@@ -94,3 +95,6 @@ public class PlayerService implements PlayerRepository {
     }
 
 }
+
+
+     

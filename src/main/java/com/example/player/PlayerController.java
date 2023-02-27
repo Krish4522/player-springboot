@@ -25,23 +25,22 @@ public class PlayerController{
     }
 
     @PutMapping("/players/{playerId}")
-    public Player updatePlayer(@PathVariable("playerId") int playerId, @RequestBody Player player){
+    public Player updatePlayer(@PathVariable("playerId") int playerId,@RequestBody Player player){
         return playerService.updatePlayer(playerId,player);
     }
 
-    @PostMapping("/players")
+    @PostMapping("/palyers")
     public Player addPlayer(@RequestBody Player player){
         return playerService.addPlayer(player);
     }
+    
 
     @GetMapping("/players/{playerId}")
-
     public Player getPlayerById(@PathVariable("playerId") int playerId){
         return playerService.getPlayerById(playerId);
     }
-    
+
     @GetMapping("/players")
-    
     public ArrayList<Player> getPlayers(){
         return playerService.getPlayers();
     }

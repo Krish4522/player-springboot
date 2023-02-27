@@ -1,17 +1,19 @@
 // Write your code here.
 package com.example.player;
 
+import java.util.*;
+
 public class Player{
     private int playerId;
     private String playerName;
-    private String playerRole;
-    private int playerJerseyNumber;
+    private int jerseyNumber;
+    private String role;
 
-    public Player(int id, String name,int jerseyNum,String role){
-        this.playerId = id;
-        this.playerName = name;
-        this.playerRole = role;
-        this.playerJerseyNumber = jerseyNum;
+    public Player(int playerId, String playerName, int jerseyNumber, String role){
+        this.playerId = playerId;
+        this.playerName = playerName;
+        this.jerseyNumber = jerseyNumber;
+        this.role = role;
     }
 
     public int getPlayerId(){
@@ -29,21 +31,21 @@ public class Player{
     public void setPlayerName(String name){
         this.playerName = name;
     }
-     
-    public String getPlayerRole(){
-        return this.playerRole;
+
+    public int getJerseyNumber(){
+        return this.jerseyNumber;
     }
 
-    public void setPlayerRole(String role){
-        this.playerRole = role;
+    public void setJerseyNumber(int jerseyNumber){
+        this.jerseyNumber = jerseyNumber;
     }
 
-    public int getPlayerJerseyNumber(){
-        return this.playerJerseyNumber;
-    }
+    public String getRole(){
+        return this.role;
+    }  
 
-    public void setPlayerJerseyNumber(int jerseyNum){
-        this.playerJerseyNumber = jerseyNum;
+    public void setRole(String role){
+        this.role = role;
     }
     
 }
