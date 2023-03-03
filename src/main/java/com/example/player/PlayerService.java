@@ -9,18 +9,17 @@
 
 package com.example.player;
 
-import java.util.*;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
+
 import com.example.player.Player;
 import com.example.player.PlayerRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
-// Don't modify the below code
+import java.util.*;
 
 public class PlayerService implements PlayerRepository {
 
     private static HashMap<Integer, Player> team = new HashMap<>();
-    int uniquePlayerId = 12;
 
     public PlayerService() {
         team.put(1, new Player(1, "Alexander", 5, "All-rounder"));
@@ -36,65 +35,69 @@ public class PlayerService implements PlayerRepository {
         team.put(11, new Player(11, "Bob", 25, "Batsman"));
     }
 
-    // Don't modify the above code
+    int uniqueId = 12;
 
-    // Write your code here
     @Override
-    public ArrayList<Player> getPlayers(){
+    public ArrayList<Player> getPlayers() {
         Collection<Player> playerCollection = team.values();
         ArrayList<Player> players = new ArrayList<>(playerCollection);
+
         return players;
     }
 
     @Override
-    public Player getPlayerById(int playerId){
+    public Player getPlayerById(int playerId) {
         Player player = team.get(playerId);
-        if(player == null){
+
+        if (player == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+
         return player;
     }
 
     @Override
-    public Player addPlayer(Player player){
-        player.setPlayerId(uniquePlayerId);
-        team.put(uniquePlayerId, player);
-        uniquePlayerId += 1;
+    public Player addPlayer(Player player) {
+        player.setPlayerId(uniqueId);
+        team.put(uniqueId, player);
+
+        uniqueId += 1;
         return player;
     }
 
     @Override
-    public Player updatePlayer(int playerId, Player player){
+    public Player updatePlayer(int playerId, Player player) {
         Player existingPlayer = team.get(playerId);
-        if(existingPlayer == null){
+
+        if (existingPlayer == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        if(player.getPlayerName() != null){
+
+        if (player.getPlayerName() != null) {
             existingPlayer.setPlayerName(player.getPlayerName());
         }
-        if(String.valueOf(player.getJerseyNumber()) != null){
+
+        if (player.getJerseyNumber() != 0) {
             existingPlayer.setJerseyNumber(player.getJerseyNumber());
         }
-        if(player.getRole() != null){
+
+        if (player.getRole() != null) {
             existingPlayer.setRole(player.getRole());
         }
+
         return existingPlayer;
-        
     }
 
     @Override
-    public void deletePlayer(int playerId){
+    public void deletePlayer(int playerId) {
+
         Player player = team.get(playerId);
-        if(player == null){
+        if (player == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        else{
+        } else {
             team.remove(playerId);
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         }
     }
 
 }
-
-
-     
